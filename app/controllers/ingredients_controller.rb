@@ -14,7 +14,8 @@ class IngredientsController < ApplicationController
       redirect_to ingredients_path
     else
       ingredients
-      render :index
+      # binding.pry
+      render :index, format: :html
     end
   end
 

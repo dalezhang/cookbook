@@ -1,12 +1,10 @@
-= form_with(model: ingredient, local: true) do |form|
-  div class="input-group  #{ingredient.errors&.messages&.dig(:name).present? ? 'is-invalid' : ''}"
-    = form.text_field :name, class: "form-control", placeholder: "Enter ingredient name", data: { reflex: "change->IngredientReflex#form" }
-    = form.submit class: "btn btn-outline-secondary"
-    - if ingredient.persisted?
-      = link_to "Cancel", ingredient, class: "btn btn-outline-secondary"
-    - else
-      = link_to "Cancel", ingredients_path, class: "btn btn-outline-secondary"
-    - if ingredient.persisted?
-      = link_to 'Destroy', ingredient, method: :delete,  class: "btn btn-danger btn-outline-secondary", data: { confirm: 'Are you sure?' }
-  div class="invalid-feedback"
-    = "#{ingredient.errors&.messages&.dig(:name)&.join('')}."
+= form_with(model: ingredient, local: true, data: {turbo: false}, html: {class: "mx-auto mt-16 max-w-xl sm:mt-10"}) do |form|
+  div class="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2"
+    div class="sm:col-span-2"
+      = form.text_field :name, placeholder: "Enter ingredient name", data: { reflex: "change->IngredientReflex#form" }, class: "block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-insetfocus:ring-indigo-600 sm:text-sm sm:leading"
+      - if ingredient.errors&.messages&.dig(:name).present?
+        div class="px-3 text-rose-600"
+          = "#{ingredient.errors&.messages&.dig(:name)&.join('')}."
+  div class="flex lg:justify-end gap-x-0.5 mt-3"
+    = form.submit  class: "w-[150px] block rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+    a href="/ingredients" class="w-[110px] block rounded-md bg-rose-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-rose-500" Cancel

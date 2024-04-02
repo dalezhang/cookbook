@@ -1,19 +1,18 @@
-= render partial: "layouts/header", locals: { controller: "ingredients"  }
 div class="mx-auto my-16 max-w-[552px] md:mt-10 md:w-full md:px-4"
-  div class="row justify-content-sm-center"
-    h1 class="text-2xl sm:text-3xl font-extrabold" Ingredients
-    div class="mt-10 mt-10"
-      = render 'form', ingredient: @ingredient
-    table class="ingredient table mt-10 mt-10 border-collapse table-striped table-hover"
-      thead class="table-light"
-        tr
-          th scope="col" Name
-          th scope="col" Exist
+  h2 class="mb-8 md:mb-6 md:text-[22px]" Ingredients
+  div class="mt-10 mt-10"
+    = render 'form', ingredient: @ingredient
+  div class="mt-10 mt-10"
+    table class="ingredient w-full border-collapse border border-slate-400"
+      thead
+        tr class="border border-slate-300"
+          th class="p-2 text-left" Name
+          th class="p-2 text-left" Exist
       tbody
         - if @ingredients.any?
           - @ingredients.each do |ingredient|
-            tr
-              td class="w-9/12"
+            tr class="border border-slate-300"
+              td class="w-9/12 p-2"
                 - if @edit_ingredient_id.to_s == ingredient.id.to_s
                   input class="#{@edit_errors&.dig(:name) ? 'is-invalid' : ''}" type="text" data-reflex="change->Ingredient#update" data-id="#{ingredient.id}" value="#{ingredient.name}"
                   div class="invalid-feedback"
@@ -21,7 +20,7 @@ div class="mx-auto my-16 max-w-[552px] md:mt-10 md:w-full md:px-4"
                 - else
                   a href="#" class="block md:w-full hover:text-sky-500" data-reflex="click->Ingredient#edit" data-id="#{ingredient.id}"
                     = ingredient.name
-              td
+              td class="p-2"
                 = check_box_tag 'exist', '1', ingredient.exist, class: "form-check-input", data: {reflex: "click->Ingredient#toggle", id: ingredient.id}
 
 
