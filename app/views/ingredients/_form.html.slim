@@ -1,0 +1,12 @@
+= form_with(model: ingredient, local: true) do |form|
+  div class="input-group  #{ingredient.errors&.messages&.dig(:name).present? ? 'is-invalid' : ''}"
+    = form.text_field :name, class: "form-control", placeholder: "Enter ingredient name", data: { reflex: "change->IngredientReflex#form" }
+    = form.submit class: "btn btn-outline-secondary"
+    - if ingredient.persisted?
+      = link_to "Cancel", ingredient, class: "btn btn-outline-secondary"
+    - else
+      = link_to "Cancel", ingredients_path, class: "btn btn-outline-secondary"
+    - if ingredient.persisted?
+      = link_to 'Destroy', ingredient, method: :delete,  class: "btn btn-danger btn-outline-secondary", data: { confirm: 'Are you sure?' }
+  div class="invalid-feedback"
+    = "#{ingredient.errors&.messages&.dig(:name)&.join('')}."

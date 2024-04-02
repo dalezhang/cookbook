@@ -1,0 +1,8 @@
+nav class="relative bg-primary p-4 text-white md:fixed md:z-10 md:w-full"
+  div class="flex items-center justify-between"
+    a href="#" My CookBook
+    ul class="mx-auto flex w-[1128px] space-x-4 md:hidden lg:ml-20"
+      li
+        a href="/ingredients" class="flex items-center gap-1 rounded px-6 py-2 hover:bg-white hover:bg-opacity-20 md:px-4 #{controller == "ingredients" ? "bg-white bg-opacity-20" : ""}" Ingredients
+      li
+        a href="/foods" class="flex items-center gap-1 rounded px-6 py-2 hover:bg-white hover:bg-opacity-20 md:px-4  #{controller == "foods" ? "bg-white bg-opacity-20" : ""}" Foods
