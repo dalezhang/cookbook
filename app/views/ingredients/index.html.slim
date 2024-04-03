@@ -15,13 +15,15 @@ div class="mx-auto my-16 max-w-[552px] md:mt-10 md:w-full md:px-4"
               td class="w-9/12 p-2"
                 - if @edit_ingredient_id.to_s == ingredient.id.to_s
                   input class="#{@edit_errors&.dig(:name) ? 'is-invalid' : ''}" type="text" data-reflex="change->Ingredient#update" data-id="#{ingredient.id}" value="#{ingredient.name}"
-                  div class="invalid-feedback"
+                  div class="px-3 text-rose-600"
                     = "#{@edit_errors&.dig(:name)&.join('')}."
                 - else
                   a href="#" class="block md:w-full hover:text-sky-500" data-reflex="click->Ingredient#edit" data-id="#{ingredient.id}"
                     = ingredient.name
               td class="p-2"
-                = check_box_tag 'exist', '1', ingredient.exist, class: "form-check-input", data: {reflex: "click->Ingredient#toggle", id: ingredient.id}
+                = check_box_tag 'exist', '1', ingredient.exist,  data: {reflex: "click->Ingredient#toggle", id: ingredient.id}
+              td class="p-2"
+                = link_to 'Delete', '#', data: {reflex: "click->Ingredient#delete", id: ingredient.id}, class: "block rounded-md bg-rose-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-rose-500"
 
 
 
