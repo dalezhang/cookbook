@@ -2,24 +2,32 @@
 
 class IngredientReflex < ApplicationReflex
 
-  def form
-    @ingredient = Ingredient.new(name: element[:value])
+  def validate_name(name)
+    @ingredient = Ingredient.new(name: name)
     @ingredient.valid?
   end
 
-  def edit
-    @edit_ingredient_id = element.dataset[:id]
+  def new
+    @ingredient = Ingredient.new
+  end
+
+  def edit(id = element.dataset[:id])
+    @ingredient = Ingredient.find_by(id: id)
   end
 
   def update
-    ingredient = Ingredient.find_by(id: element.dataset[:id])
-    ingredient.name = element[:value]
-    if ingredient.valid?
-      @edit_ingredient_id = nil
-      ingredient.save
-    else
-      @edit_ingredient_id = ingredient.id
-      @edit_errors = ingredient.errors.messages
+    @ingredient = Ingredient.find_by(id: element.dataset[:id])
+    case element.dataset[:attribute]
+    when "name"
+      @ingredient.name = element[:value]
+    when "count"
+      @ingredient.count = element[:value]
+    when "color"
+      @ingredient.color = element[:value]
+    end
+    if @ingredient.valid?
+      @ingredient.save
+      @ingredient = nil
     end
   end
 
@@ -30,11 +38,14 @@ class IngredientReflex < ApplicationReflex
 
   def create
     @ingredient = Ingredient.new(name: params.dataset[:name])
-    @ingredient.save!
+    if @ingredient.valid?
+    @ingredient.save
     cable_ready.insert_adjacent_html(
       selector: "#ingredients",
       html: render(partial: "ingredients/ingredient", locals: { ingredient: @ingredient })
     ).broadcast
+    @ingredient = nil
+    end
   end
 
   def delete

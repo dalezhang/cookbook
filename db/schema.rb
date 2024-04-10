@@ -29,6 +29,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_02_034811) do
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
     t.boolean "exist", default: true
+    t.string "color"
+    t.integer "count", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

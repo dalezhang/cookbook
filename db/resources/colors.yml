@@ -1,0 +1,17 @@
+color:
+  - name: yellow
+    hex: '#E98A4C'
+  - name: grey
+    hex: '#636a73'
+  - name: orange
+    hex: '#c33c31'
+  - name: blue-light
+    hex: '#4f6a89'
+  - name: blue-gray-500
+    hex: '#1E194B'
+  - name: blue
+    hex: '#33345c'
+  - name: red-500
+    hex: '#842B2D'
+  - name: secondary
+    hex: '#949592'

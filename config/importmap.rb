@@ -14,3 +14,5 @@ pin "morphdom", to: "https://ga.jspm.io/npm:morphdom@2.6.1/dist/morphdom.js", pr
 pin "cable_ready", to: "cable_ready.js", preload: true
 pin "stimulus_reflex", to: "stimulus_reflex.js", preload: true
 pin "@wizardhealth/stimulus-multiselect", to: "wizardhealth--stimulus-multiselect.js"
+pin "flowbite", to: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.turbo.min.js"
+pin "flowbite-datepicker", to: "https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.turbo.min.js"

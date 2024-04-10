@@ -1,30 +1,45 @@
-div class="mx-auto my-16 max-w-[552px] md:mt-10 md:w-full md:px-4"
+div class="mx-auto my-16 w-[800px] md:mt-10 md:px-4"
   h2 class="mb-8 md:mb-6 md:text-[22px]" Ingredients
-  div class="mt-10 mt-10"
-    = render 'form', ingredient: @ingredient
-    = render 'test_multiple_select'
+  div class="flex justify-end mt-10 mt-10"
+    - render 'form', ingredient: @ingredient
+    - render 'test_multiple_select'
+    = render 'popup', ingredient: @ingredient
   div class="mt-10 mt-10"
     table class="ingredient w-full border-collapse border border-slate-400"
       thead
         tr class="border border-slate-300"
           th class="p-2 text-left" Name
+          th class="p-2 text-left" Count
+          th class="p-2 text-left" Color
           th class="p-2 text-left" Exist
       tbody
         - if @ingredients.any?
           - @ingredients.each do |ingredient|
             tr class="border border-slate-300"
-              td class="w-9/12 p-2"
-                - if @edit_ingredient_id.to_s == ingredient.id.to_s
-                  input class="#{@edit_errors&.dig(:name) ? 'is-invalid' : ''}" type="text" data-reflex="change->Ingredient#update" data-id="#{ingredient.id}" value="#{ingredient.name}"
+              td class="w-6/12 p-2"
+                - if @ingredient.id == ingredient.id
+                  input type="text" data-reflex="change->Ingredient#update" data-attribute="name" data-id="#{ingredient.id}" value="#{ingredient.name}"
                   div class="px-3 text-rose-600"
-                    = "#{@edit_errors&.dig(:name)&.join('')}."
+                    = @ingredient.errors&.messages&.dig(:name)&.join('')
                 - else
                   a href="#" class="block md:w-full hover:text-sky-500" data-reflex="click->Ingredient#edit" data-id="#{ingredient.id}"
                     = ingredient.name
               td class="p-2"
-                = check_box_tag 'exist', '1', ingredient.exist,  data: {reflex: "click->Ingredient#toggle", id: ingredient.id}
+                - if @ingredient.id == ingredient.id
+                  input type="number" min="0" data-reflex="change->Ingredient#update" data-attribute="count" data-id="#{ingredient.id}" value="#{ingredient.count}"
+                - else
+                  a href="#" class="block md:w-full hover:text-sky-500" data-reflex="click->Ingredient#edit" data-id="#{ingredient.id}"
+                    = ingredient.count
+              td class="w-[20px] p-2"
+                - if @ingredient.id == ingredient.id
+                  input name="ingredient[color]" type="color" value="#{ingredient.color || '#ffffff'}" class="block w-full rounded-md border-0" data-reflex="change->Ingredient#update" data-attribute="color" data-id="#{ingredient.id}"
+                - else
+                  button style="background-color: #{ ingredient.color}" data-reflex="click->Ingredient#edit" data-id="#{ingredient.id}" class="w-[40px]" &nbsp;&nbsp;
               td class="p-2"
-                = link_to 'Delete', '#', data: {reflex: "click->Ingredient#delete", id: ingredient.id}, class: "block rounded-md bg-rose-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-rose-500"
+                = check_box_tag 'exist', '1', ingredient.exist,  data: {reflex: "click->Ingredient#toggle", id: ingredient.id}
+              td class="w-full p-2 flex gap-x-1 justify-end"
+                / button data-controller="ingredient" data-action="click->ingredient#edit" data-ingredient-id-value="#{ ingredient.id}" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:text-white" Edit
+                button data-reflex="click->Ingredient#delete" data-id="#{ingredient.id}" class="block rounded-md bg-rose-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-rose-500" Delete
 
 
 
