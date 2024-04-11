@@ -15,17 +15,12 @@ gem "sqlite3", "~> 1.4"
 gem "puma", ">= 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
-gem "stimulus_reflex", '3.5.0.rc3'
 
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
-gem "tailwindcss-rails"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
@@ -72,3 +67,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "jsbundling-rails", "~> 1.3"
+
+gem "tailwindcss-rails", "~> 2.4"
+
+gem 'stimulus_reflex', '3.5.0.rc4'
+gem "redis-session-store", "~> 0.11.5"

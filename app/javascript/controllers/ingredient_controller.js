@@ -1,6 +1,12 @@
 import ApplicationController from './application_controller.js'
+import { Modal } from 'flowbite';
 
-const $targetEl = document.getElementById('ingredient-popup');
+
+// instance options object
+const instanceOptions = {
+  id: 'ingredient-popup',
+  override: true
+};
 // options with default values
 const options = {
   placement: 'center',
@@ -19,15 +25,14 @@ const options = {
   },
 };
 
-// instance options object
-const instanceOptions = {
-  id: 'ingredient-popup',
-  override: true
-};
-const modal = new Modal($targetEl, options, instanceOptions);
 
 export default class extends ApplicationController {
   static values = { id: String }
+  initialize() {
+    if (window.ingredientModel == undefined) {
+      window.ingredientModel = new Modal(document.getElementById('ingredient-popup'), options, instanceOptions)
+    }
+  }
 
 
   connect() {
@@ -41,13 +46,14 @@ export default class extends ApplicationController {
 
   new(event) {
     event.preventDefault()
+    console.log('new')
     this.stimulate('IngredientReflex#new')
   }
 
   validate(event) {
     event.preventDefault()
     console.log('validate')
-    modal.hide()
+    window.ingredientModel.hide()
     this.stimulate('IngredientReflex#validate_name', event.target.value)
   }
 
@@ -59,24 +65,22 @@ export default class extends ApplicationController {
     if (reflex.includes('IngredientReflex#edit')) {
       console.log('edit success')
       // show the modal
-      modal.show();
+      window.ingredientModel.show();
     }
     if (reflex.includes('IngredientReflex#new')) {
       console.log('new success');
       // show the modal
-      modal.show();
+      window.ingredientModel.show();
     }
 
     if (reflex.includes('IngredientReflex#validate_name')) {
-      console.log('new success');
-      // show the modal
-      modal.show();
+      window.ingredientModel.show();
     }
   }
 
   cancle(event) {
     event.preventDefault()
     console.log('cancle')
-    modal.hide()
+    window.ingredientModel.toggle()
   }
 }
