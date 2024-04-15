@@ -12,3 +12,9 @@ application.register("hello", HelloController)
 
 import IngredientController from "./ingredient_controller"
 application.register("ingredient", IngredientController)
+
+import FoodController from "./food_controller"
+application.register("food", FoodController)
+
+import { Multiselect } from '@wizardhealth/stimulus-multiselect'
+application.register('multiselect', Multiselect)

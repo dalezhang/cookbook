@@ -3,6 +3,10 @@ class IngredientsController < ApplicationController
   def index
     ingredients
     @ingredient ||= Ingredient.new
+    respond_to do |format|
+      format.json
+      format.html
+    end
   end
 
   def create
@@ -35,6 +39,6 @@ class IngredientsController < ApplicationController
   private
 
   def ingredients
-    @ingredients ||= Ingredient.all
+    @ingredients ||= Ingredient.all.order(updated_at: :desc)
   end
 end

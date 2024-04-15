@@ -1,8 +1,6 @@
 div class="mx-auto my-16 w-[800px] md:mt-10 md:px-4"
   h2 class="mb-8 md:mb-6 md:text-[22px]" Ingredients
   div class="flex justify-end mt-10 mt-10"
-    - render 'form', ingredient: @ingredient
-    - render 'test_multiple_select'
     = render 'popup', ingredient: @ingredient
   div class="mt-10 mt-10"
     table class="ingredient w-full border-collapse border border-slate-400"

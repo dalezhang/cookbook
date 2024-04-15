@@ -1,0 +1,2 @@
+div data-controller="multiselect" data-multiselect-items-value="#{ Ingredient.all.map {|obj| {"value" => obj.id.to_s, "text" => obj.name}}.to_json}" data-multiselect-selected-value="#{food.ingredients.map {|obj| {"value" => obj.id.to_s, "text" => obj.name}}.to_json}" data-placeholder="Select ingredients..." id="food-ingredients-controller"
+  select multiple="multiple" class="multiselect__hidden" data-multiselect-target="hidden" name="food[ingredient_ids][]" id="food_ingredients"

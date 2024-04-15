@@ -1,0 +1,26 @@
+div class="mx-auto my-16 w-[800px] md:mt-10 md:px-4"
+  h2 class="mb-8 md:mb-6 md:text-[22px]" Foods
+  div class="flex justify-end mt-10 mt-10"
+    = render 'popup', food: @food
+  div class="mt-10 mt-10"
+    table class="ingredient w-full border-collapse border border-slate-400"
+      thead
+        tr class="border border-slate-300"
+          th class="p-2 text-left" Name
+          th class="p-2 text-left" Ingredients
+      tbody
+        - if @foods.any?
+          - @foods.each do |food|
+            tr class="border border-slate-300"
+              td class="w-6/12 p-2"
+                = food.name
+              td class="p-2"
+                - food.food_ingredients.each do |food_ingredient|
+                  span class="mr-2" style="background-color: #{ food_ingredient.ingredient_color}"
+                    = "#{food_ingredient.ingredient_name}(#{food_ingredient.count})"
+              td class="w-full p-2 flex gap-x-1 justify-end"
+                button data-controller="food" data-action="click->food#edit" data-food-id-value="#{food.id}" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:text-white" Edit
+                button data-reflex="click->Food#delete" data-id="#{food.id}" class="block rounded-md bg-rose-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:bg-rose-500" Delete
+
+
+

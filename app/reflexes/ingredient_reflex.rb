@@ -39,12 +39,8 @@ class IngredientReflex < ApplicationReflex
   def create
     @ingredient = Ingredient.new(name: params.dataset[:name])
     if @ingredient.valid?
-    @ingredient.save
-    cable_ready.insert_adjacent_html(
-      selector: "#ingredients",
-      html: render(partial: "ingredients/ingredient", locals: { ingredient: @ingredient })
-    ).broadcast
-    @ingredient = nil
+      @ingredient.save
+      @ingredient = nil
     end
   end
 
