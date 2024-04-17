@@ -59,17 +59,11 @@ export default class extends ApplicationController {
 
   reflexSuccess (element, reflex, noop, id) {
     // modal.toggle()
-    console.log('reflexSuccess')
-    console.log(element, reflex, noop, id)
     // // show success message
     if (reflex.includes('IngredientReflex#edit')) {
-      console.log('edit success')
-      // show the modal
       window.ingredientModel.show();
     }
     if (reflex.includes('IngredientReflex#new')) {
-      console.log('new success');
-      // show the modal
       window.ingredientModel.show();
     }
 
@@ -80,7 +74,6 @@ export default class extends ApplicationController {
 
   cancle(event) {
     event.preventDefault()
-    console.log('cancle')
     window.ingredientModel.toggle()
   }
 }

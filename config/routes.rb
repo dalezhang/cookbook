@@ -8,5 +8,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :ingredients
-  resources :foods
+  resources :foods do
+    get :add_to_daily_dish, on: :member
+  end
+
+  root "home#index"
 end
