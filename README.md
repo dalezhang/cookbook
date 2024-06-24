@@ -20,7 +20,7 @@ rails s
 Due to slow network speeds, the `ImportMap pin` fails to download packages properly, necessitating manual copying of files to the `vendor/javascript` directory. For complex dependency packages, it is necessary to check the dependency relationships and copy the related packages to the `vendor/javascript` directory as well.
 This approach proves to be quite inconvenient. It would be possible to introduce JS dependencies in the form of gems; however, some gems have not been updated for a long time, making it impossible to use the latest versions.
 
-So I used [jsbuilding](https://github.com/evilmartians/jsbuilding)和[esbuild](https://esbuild.github.io/) to replaseImportMap。
+So I used [jsbuilding](https://github.com/evilmartians/jsbuilding) and [esbuild](https://esbuild.github.io/) to replase the ImportMap.
 
 ### Flowbite
 
